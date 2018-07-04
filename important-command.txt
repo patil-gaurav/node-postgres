@@ -1,0 +1,4 @@
+Imaportant commands
+-------------------
+
+sudo -u postgres createdb todos-dev
