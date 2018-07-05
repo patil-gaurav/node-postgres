@@ -4,17 +4,33 @@ module.exports = (sequelize, DataTypes) => {
     uuid: {
       type: DataTypes.UUID,
       allowNull: false,
-      defaultValue: Sequelize.UUIDV4
+      defaultValue: DataTypes.UUIDV4
     },
     courseName: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'Course name must be present'
+        }
+      }
     },
     courseType: {
       type: DataTypes.ENUM,
       values: ['medical', 'pharmacy', 'engineering'],
       allowNull: false,
-      defaultValue: 'engineering'
+      // defaultValue: 'engineering',
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'Course type must be present'
+        },
+        isIn: {
+          args: [['medical', 'pharmacy', 'engineering']],
+          msg: 'Course type must be in medical, pharmacy or engineering'
+        }
+      }
     }
   }, {});
   Course.associate = function(models) {

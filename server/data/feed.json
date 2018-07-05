@@ -1,0 +1,52 @@
+{
+  "states": [
+    {
+      "country" : "India",
+      "name" : "Maharashtra",
+      "capital" : "Mumbai",
+      "universities": [
+        {
+          "name": "Savitribai Phule Pune University",
+          "address": "Ganeshkhind, Pune, Maharashtra 411007",
+          "courses": [
+            {
+              "courseName": "medical",
+              "colleges": []
+            },
+            {
+              "courseName": "pharmacy",
+              "colleges": []
+            },
+            {
+              "courseName": "engineering",
+              "colleges": [
+                {
+                  "collegeCode": 6138,
+                  "name": "Genba Sopanrao Moze Trust Parvatibai Genba Moze College of Engineering,Wagholi, Pune",
+                  "totalIntake": 60,
+                  "address": "Gat No. 2181, Wagholi, Tal Haveli Dist. Pune",
+                  "city": "Pune",
+                  "state": "Maharashtra",
+                  "pin": "444213"
+                },
+                {
+                  "collegeCode": 6139,
+                  "name": "Progressive Education Society's Modern College of Engineering, Pune",
+                  "totalIntake": 60,
+                  "address": "P.E.S. Modern College of Engineering, 1186 A, Shivajinagar, Off. J.M. Road, Pune",
+                  "city": "Pune",
+                  "state": "Maharashtra",
+                  "pin": "444214"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "North Maharashtra University",
+          "address": "Umavi Nagar, Jalgaon, Maharashtra 425001"
+        }
+      ]
+    }
+  ]
+}

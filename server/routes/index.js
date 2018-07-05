@@ -1,5 +1,8 @@
 const todosController = require('../controllers').todos;
 const todoItemsController = require('../controllers').todoItems;
+const statesApiCtrl = require('../controllers').states;
+const universitiesApiCtrl = require('../controllers').universities;
+const coursesApiCtrl = require('../controllers').courses;
 
 module.exports = (app) => {
   app.get('/api', (req, res) => res.status(200).send({
@@ -15,6 +18,16 @@ module.exports = (app) => {
   app.post('/api/todos/:todoId/items', todoItemsController.create);
   app.put('/api/todos/:todoId/items/:todoItemId', todoItemsController.update);
   app.delete('/api/todos/:todoId/items/:todoItemId', todoItemsController.destroy);
+
+  // State Routes
+  app.post('/api/states', statesApiCtrl.create);
+  app.get('/api/states', statesApiCtrl.index);
+
+  // University Routes
+  app.post('/api/states/:stateId/universities', universitiesApiCtrl.create);
+
+  // Course Routes
+  app.post('/api/university/:universityId/courses', coursesApiCtrl.create);
 
   app.all('/api/todos/:todoId/items', (req, res) =>
     res.status(405).send({
