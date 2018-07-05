@@ -1,5 +1,6 @@
 const State = require('../../models').State;
 const University = require('../../models').University;
+const Course = require('../../models').Course;
 
 module.exports = {
   create(req, res) {
@@ -21,6 +22,18 @@ module.exports = {
           .catch(error => res.status(401).send(error));
       })
       .catch(error => res.status(400).send(error));
+  },
+
+  index(req, res) {
+    return University
+            .findAll({
+              include: [{
+                model: Course,
+                as: 'courses'
+              }]
+            })
+            .then(universities => res.status(200).send(universities))
+            .catch(error => res.status(401).send(error));
   }
 }
 

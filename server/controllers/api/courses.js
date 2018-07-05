@@ -6,10 +6,11 @@ module.exports = {
     University
       .findById(req.params.universityId)
       .then(university => {
+        console.log(university);
         if (!university) {
           return res.status(401).send({
             message: 'University not found'
-          })
+          });
         }
 
         Course

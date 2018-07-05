@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.ENUM,
       values: ['medical', 'pharmacy', 'engineering'],
       allowNull: false,
-      // defaultValue: 'engineering',
+      defaultValue: 'engineering',
       validate: {
         notEmpty: {
           args: true,
@@ -35,9 +35,10 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Course.associate = function(models) {
     // associations can be defined here
-    Course.belongsTo(models.University, {
-      foreignKey: 'universityId',
-      onDelete: 'CASCADE'
+    Course.belongsToMany(models.University, {
+      as: 'Course',
+      through: 'UniversityCourses',
+      foreignKey: 'courseId'
     }),
 
     Course.hasMany(models.College, {

@@ -16,7 +16,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      course_type: {
+      courseType: {
         type: Sequelize.ENUM,
         values: ['medical', 'pharmacy', 'engineering'],
         allowNull: false

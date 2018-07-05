@@ -25,9 +25,10 @@ module.exports = (app) => {
 
   // University Routes
   app.post('/api/states/:stateId/universities', universitiesApiCtrl.create);
+  app.get('/api/universities', universitiesApiCtrl.index);
 
   // Course Routes
-  app.post('/api/university/:universityId/courses', coursesApiCtrl.create);
+  app.post('/api/universities/:universityId/courses', coursesApiCtrl.create);
 
   app.all('/api/todos/:todoId/items', (req, res) =>
     res.status(405).send({
