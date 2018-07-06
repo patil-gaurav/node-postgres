@@ -13,10 +13,6 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: {
           args: true,
           msg: 'University name must be present'
-        },
-        unique: {
-          args: true,
-          msg: 'University already exist'
         }
       }
     },
@@ -39,8 +35,8 @@ module.exports = (sequelize, DataTypes) => {
     }),
 
     University.belongsToMany(models.Course, {
-      as: 'University',
       through: 'UniversityCourses',
+      as: 'courses',
       foriegnKey: 'universityId'
     }),
 

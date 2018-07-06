@@ -11,20 +11,20 @@ module.exports = {
       universityId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: {
-          model: 'Universitiy',
-          key: 'id',
-          as: 'universityId',
-        }
+        // references: {
+        //   model: 'University',
+        //   key: 'id',
+        //   as: 'universityId',
+        // }
       },
-      coursesId: {
+      courseId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        reference: {
-          model: 'Course',
-          key: 'id',
-          as: 'courseId'
-        }
+        // reference: {
+        //   model: 'Course',
+        //   key: 'id',
+        //   as: 'courseId'
+        // }
       },
       createdAt: {
         allowNull: false,

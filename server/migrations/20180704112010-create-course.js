@@ -14,7 +14,8 @@ module.exports = {
       },
       courseName: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        unique : true
       },
       courseType: {
         type: Sequelize.ENUM,
@@ -28,15 +29,6 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      },
-      universityId: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Universities',
-          key: 'id',
-          as: 'universityId',
-        }
       }
     });
   },

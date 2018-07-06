@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     courseName: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       validate: {
         notEmpty: {
           args: true,
@@ -21,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       values: ['medical', 'pharmacy', 'engineering'],
       allowNull: false,
       defaultValue: 'engineering',
+      unique: true,
       validate: {
         notEmpty: {
           args: true,
@@ -36,8 +38,8 @@ module.exports = (sequelize, DataTypes) => {
   Course.associate = function(models) {
     // associations can be defined here
     Course.belongsToMany(models.University, {
-      as: 'Course',
       through: 'UniversityCourses',
+      as: 'courses',
       foreignKey: 'courseId'
     }),
 
