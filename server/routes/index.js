@@ -3,6 +3,7 @@ const todoItemsController = require('../controllers').todoItems;
 const statesApiCtrl = require('../controllers').states;
 const universitiesApiCtrl = require('../controllers').universities;
 const coursesApiCtrl = require('../controllers').courses;
+const usersApiCtrl = require('../controllers').users;
 
 module.exports = (app) => {
   app.get('/api', (req, res) => res.status(200).send({
@@ -18,6 +19,9 @@ module.exports = (app) => {
   app.post('/api/todos/:todoId/items', todoItemsController.create);
   app.put('/api/todos/:todoId/items/:todoItemId', todoItemsController.update);
   app.delete('/api/todos/:todoId/items/:todoItemId', todoItemsController.destroy);
+
+  // User Routes
+  app.post('/api/users/signup', usersApiCtrl.signup);
 
   // State Routes
   app.post('/api/states', statesApiCtrl.create);
