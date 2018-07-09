@@ -1,7 +1,7 @@
 const User = require('../../models').User;
 const config = require('../../config/secret');
 const jsonwebtoken = require('jsonwebtoken');
-// const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 
 module.exports = {
   signup(req, res) {
@@ -11,11 +11,6 @@ module.exports = {
       return res.json({ success: false, message: 'Please provide email and password' });
     }
 
-    // var user = User.build({
-    //   email: email,
-    //   password: password
-    // });
-    // user.save()
     User
     .create({
       email: email,
@@ -42,17 +37,48 @@ module.exports = {
         })
       }
       
+      var isMatch = bcrypt.compareSync(req.body.password, user.password);
+
+      if (isMatch) {
+        var token = jsonwebtoken.sign({email: user.email}, config.secret, {});
+        res.json({success: true, token: 'JWT ' + token});
+      } else {
+        res.json({success: false, message: 'Password not match'});
+      }
+    });
+  },
+
+  profile(req, res) {
+    // var token = getToken(req.headers);
+    // if (token) {
+    //   jsonwebtoken.verify(token, config.secret, function(err, decoded) {
+    //     if (err) {
+    //       return res.json({success: false, message: 'Invalid token'})
+    //     }
+    //     res.json({success: true, message: decoded})
+    //   })
+    // } else {
+    //   res.json({success: false, message: 'Token not provided'});
+    // }
+    User.findOne({
+      email: req.user.email
     })
+    .then(user => {
+      res.json({success: true, user: user});
+    })
+    
   }
 }
 
-// var hashedPassword = function(password) {
-//   bcrypt.genSalt(10, function(err, salt) {
-//     bcrypt.hash(password, salt, function(err, hash) {
-//       if(err) {
-//         return err;
-//       }
-//       return hash;
-//     });
-//   });
+// var getToken = function(headers) {
+//   if (headers && headers.authorization) {
+//     var parted = headers.authorization.split(' ');
+//     if (parted.length == 2) {
+//       return parted[1];
+//     } else {
+//       return null;
+//     }
+//   } else {
+//     return null;
+//   }
 // }

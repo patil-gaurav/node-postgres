@@ -66,12 +66,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     hooks: {
-      beforeSave: (user, next) => {
+      beforeCreate: (user, next) => {
         console.log('hooks');
-        // user.password = hashPassword(user.password);
-        bcrypt.hash(user.password, 10, function(err, hash){
-          user.password = hash;
-        });
+        var salt = bcrypt.genSaltSync(10);
+        var hash = bcrypt.hashSync(user.password, salt);
+        user.password = hash;
+        // bcrypt.hash(user.password, 10, function(err, hash){
+        //   user.password = hash;
+        // });
       }
     }
   });
@@ -79,11 +81,9 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
   };
 
-  User.beforeCreate((user, next) => {
-    
-    var h = hashPassword(user.password);
-    console.log(h);
-  })
+  // User.beforeCreate((user, next) => {
+  //   user.password = bcrypt.hash(user.password, 10);
+  // })
   return User;
 };
 

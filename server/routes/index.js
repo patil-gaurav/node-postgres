@@ -4,6 +4,7 @@ const statesApiCtrl = require('../controllers').states;
 const universitiesApiCtrl = require('../controllers').universities;
 const coursesApiCtrl = require('../controllers').courses;
 const usersApiCtrl = require('../controllers').users;
+const authMiddlewares = require('../middlewares/auth');
 
 module.exports = (app) => {
   app.get('/api', (req, res) => res.status(200).send({
@@ -22,6 +23,8 @@ module.exports = (app) => {
 
   // User Routes
   app.post('/api/users/signup', usersApiCtrl.signup);
+  app.post('/api/users/signin', usersApiCtrl.signin);
+  app.get('/api/users/profile', authMiddlewares.checkAuth, usersApiCtrl.profile);
 
   // State Routes
   app.post('/api/states', statesApiCtrl.create);
