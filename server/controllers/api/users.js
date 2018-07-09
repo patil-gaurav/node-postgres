@@ -1,4 +1,5 @@
 const User = require('../../models').User;
+const AccessToken = require('../../models').AccessToken;
 const config = require('../../config/secret');
 const jsonwebtoken = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
@@ -37,6 +38,14 @@ module.exports = {
         })
       }
       
+      AccessToken
+        .findById(user.id)
+        .then(accessToken => {
+          if (!accessToken) {
+            AccessToken.update({})
+          }
+        })
+
       var isMatch = bcrypt.compareSync(req.body.password, user.password);
 
       if (isMatch) {

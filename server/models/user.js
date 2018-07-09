@@ -79,6 +79,10 @@ module.exports = (sequelize, DataTypes) => {
   });
   User.associate = function(models) {
     // associations can be defined here
+    User.hasOne(models.AccessToken, {
+      foreignKey: 'userId',
+      as: 'accessToken'
+    });
   };
 
   // User.beforeCreate((user, next) => {
