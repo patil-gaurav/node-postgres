@@ -1,0 +1,13 @@
+{
+  "states": [
+    {
+      "id" : 70,
+      "country" : "India",
+      "name" : "Maharashtra",
+      "abbr" : "MH",
+      "area" : "112374333SKM",
+      "largest_city" : "Mumbai",
+      "capital" : "Mumbai"
+    }
+  ]
+}
