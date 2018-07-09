@@ -27,16 +27,16 @@ module.exports = (app) => {
   app.get('/api/users/profile', authMiddlewares.checkAuth, usersApiCtrl.profile);
 
   // State Routes
-  app.post('/api/states', statesApiCtrl.create);
-  app.get('/api/states', statesApiCtrl.index);
+  // app.post('/api/states', statesApiCtrl.create);
+  // app.get('/api/states', statesApiCtrl.index);
 
   // University Routes
-  app.post('/api/states/:stateId/universities', universitiesApiCtrl.create);
-  app.get('/api/universities', universitiesApiCtrl.index);
-  app.post('/api/add-course-to-university', universitiesApiCtrl.addCourseToUniversity)
+  // app.post('/api/states/:stateId/universities', universitiesApiCtrl.create);
+  // app.get('/api/universities', universitiesApiCtrl.index);
+  // app.post('/api/add-course-to-university', universitiesApiCtrl.addCourseToUniversity)
 
   // Course Routes
-  app.post('/api/courses', coursesApiCtrl.create);
+  // app.post('/api/courses', coursesApiCtrl.create);
 
   app.all('/api/todos/:todoId/items', (req, res) =>
     res.status(405).send({
