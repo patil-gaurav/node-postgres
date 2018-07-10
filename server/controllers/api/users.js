@@ -38,19 +38,41 @@ module.exports = {
         })
       }
       
-      AccessToken
-        .findById(user.id)
-        .then(accessToken => {
-          if (!accessToken) {
-            AccessToken.update({})
-          }
-        })
+      
 
       var isMatch = bcrypt.compareSync(req.body.password, user.password);
 
       if (isMatch) {
         var token = jsonwebtoken.sign({email: user.email}, config.secret, {});
-        res.json({success: true, token: 'JWT ' + token});
+
+        AccessToken
+        .find({
+          where: {
+            userId: user.id}
+        })
+        .then(accessToken => {
+          if (!accessToken) {
+            AccessToken.create({
+              userId: user.id,
+              token: token
+            })
+            .then(createdToken => {
+              res.json({success: true, token: 'JWT ' + token});
+            })
+            .catch(createError => res.send(createError));
+            
+          } else {
+            accessToken.update({
+              token: token
+            })
+            .then(updatedToken => {
+              res.json({success: true, token: 'JWT ' + token});
+            })
+            .catch(updateError => res.send(updateError));
+          }
+        })
+        .catch(error => res.send(error));
+        
       } else {
         res.json({success: false, message: 'Password not match'});
       }
