@@ -1,18 +1,31 @@
+const AccessToken = require('../models').AccessToken;
 const jsonwebtoken = require('jsonwebtoken');
 const config = require('../config/secret');
 
 const checkAuth = (req, res, next) => {
   var token = getToken(req.headers);
   if (token) {
-    jsonwebtoken.verify(token, config.secret, function(err, decoded) {
-      if (err) {
-        return res.json({success: false, message: 'Invalid token'})
+
+    AccessToken.find({
+      where: {
+        token: token
       }
-      // res.json({success: true, message: decoded})
-      req.user = {
-        email: decoded.email
+    })
+    .then(accesToken => {
+      if (!accesToken) {
+        return res.json({success: false, message: 'Please login'});
       }
-      next();
+
+      jsonwebtoken.verify(token, config.secret, function(err, decoded) {
+        if (err) {
+          return res.json({success: false, message: 'Invalid token'})
+        }
+        // res.json({success: true, message: decoded})
+        req.user = {
+          email: decoded.email
+        }
+        next();
+      })
     })
   } else {
     res.json({success: false, message: 'Token not provided'});
