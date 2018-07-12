@@ -27,8 +27,8 @@ module.exports = (app) => {
   app.get('/api/users/profile', authMiddlewares.checkAuth, usersApiCtrl.profile);
 
   // State Routes
-  // app.post('/api/states', statesApiCtrl.create);
-  // app.get('/api/states', statesApiCtrl.index);
+  app.post('/api/states', statesApiCtrl.create);
+  app.get('/api/states', authMiddlewares.checkAuth, statesApiCtrl.index);
 
   // University Routes
   // app.post('/api/states/:stateId/universities', universitiesApiCtrl.create);
