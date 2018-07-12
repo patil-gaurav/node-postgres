@@ -1,4 +1,7 @@
 'use strict';
+
+var helper = require('../helpers/application');
+
 module.exports = (sequelize, DataTypes) => {
   var State = sequelize.define('State', {
     uuid: {
@@ -13,21 +16,7 @@ module.exports = (sequelize, DataTypes) => {
           args: true,
           msg: 'State must be present'
         },
-        isUnique: function (value, next) {
-          State.find({
-            where: {name: value},
-            attributes: ['id']
-          }).done(function(error, user) {
-            if (error) {
-              return next(error);
-            }
-            if (user) {
-              // return res.status(401).json({msg: 'State is already exist'})
-              return next('State is already exist');
-            }
-            next();
-          })
-        }
+        isUnique: helper.isUniqueValidation('State', 'name')
       }
     },
     country: {
@@ -53,6 +42,11 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   State.associate = function(models) {
     // associations can be defined here
+    State.hasMany(models.University, {
+      // foreignKey: 'stateId',
+      as: 'universities',
+      foreignKey: 'stateId',
+    })
   };
   return State;
 };
