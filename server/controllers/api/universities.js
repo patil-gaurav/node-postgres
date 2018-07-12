@@ -38,6 +38,7 @@ module.exports = {
       .findAll({
         include: [{
           model: Course,
+          attributes: ['id', 'name', 'type', 'degree'],
           as: 'courses'
         }]
       })
