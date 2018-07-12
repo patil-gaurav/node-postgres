@@ -28,7 +28,9 @@ module.exports = {
             address: req.body.address
           })
           .then(university => res.status(201).send(university))
-          .catch(error => res.status(401).send(error));
+          .catch(error => {
+            console.log(error)
+            res.status(401).send(error)});
       })
       .catch(error => res.status(401).send(error));
   },
