@@ -1,10 +1,11 @@
 const todosController = require('../controllers').todos;
 const todoItemsController = require('../controllers').todoItems;
+const usersApiCtrl = require('../controllers').users;
+const authMiddlewares = require('../middlewares/auth');
 const statesApiCtrl = require('../controllers').states;
 const universitiesApiCtrl = require('../controllers').universities;
 const coursesApiCtrl = require('../controllers').courses;
-const usersApiCtrl = require('../controllers').users;
-const authMiddlewares = require('../middlewares/auth');
+const collegesApiCtrl = require('../controllers').colleges;
 
 module.exports = (app) => {
   app.get('/api', (req, res) => res.status(200).send({
@@ -38,6 +39,9 @@ module.exports = (app) => {
   // Course Routes
   app.post('/api/courses', coursesApiCtrl.create);
   app.get('/api/courses', coursesApiCtrl.index);
+
+  // College Routes
+  app.post('/api/colleges', collegesApiCtrl.create);
 
   app.all('/api/todos/:todoId/items', (req, res) =>
     res.status(405).send({

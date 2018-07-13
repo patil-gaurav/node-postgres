@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
           args: 4,
           msg: 'Enter 4 digit college code in string format'
         },
-        isUnique: helper.isUniqueValidation("College", "code")
+        // isUnique: helper.isUniqueValidation("College", "code")
       }
     },
     name: {
@@ -80,9 +80,30 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     }
-  }, {});
+  }, {
+    hooks: {
+      beforeSave: (college, options) => {
+        console.log(college.code);
+        college.code = college.code.replace(/\s/g,'');
+      }
+    }
+  });
   College.associate = function(models) {
     // associations can be defined here
+    College.belongsTo(models.University, {
+      foreignKey: 'universityId'
+    });
+
+    College.belongsToMany(models.Course, {
+      as: 'courses',
+      through: 'CollegeCourse',
+      foreignKey: 'collegeId'
+    });
+
+    // as: 'courses',
+    // through: 'UniversityCourse',
+    // foreignKey: 'universityId'
+
   };
   return College;
 };

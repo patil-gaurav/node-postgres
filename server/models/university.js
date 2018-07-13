@@ -28,10 +28,16 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: {
           args: true,
           msg: 'Address must be present'
-        }
+        },
+        isUnique: helper.isUniqueValidation("University", "address")
       }
     }
-  }, {});
+  }, {
+    // validate: {
+    //   uniqueName: helper.isUniqueValidation("University", "name"),
+    //   uniqueAddress: helper.isUniqueValidation("University", "address")
+    // }
+  });
   University.associate = function(models) {
     // associations can be defined here
     University.belongsTo(models.State, {
@@ -42,6 +48,11 @@ module.exports = (sequelize, DataTypes) => {
     University.belongsToMany(models.Course, {
       as: 'courses',
       through: 'UniversityCourse',
+      foreignKey: 'universityId'
+    });
+
+    University.hasMany(models.College, {
+      as: 'colleges',
       foreignKey: 'universityId'
     });
 

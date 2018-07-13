@@ -36,7 +36,8 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: {
           args: true,
           msg: 'Capital must be present'
-        }
+        },
+        isUnique: helper.isUniqueValidation('State', 'capital')
       }
     }
   }, {});
