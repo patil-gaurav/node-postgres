@@ -28,7 +28,6 @@ module.exports = (sequelize, DataTypes) => {
         //     next();
         //   });
         // }
-
       }
     },
     country: {
@@ -50,17 +49,6 @@ module.exports = (sequelize, DataTypes) => {
           msg: 'Capital must be present'
         },
         isUnique: isUnique('State', 'capital')
-        // isUnique(value, next) {
-        //   State.find({
-        //     where: { capital: value },
-        //     attributes: ['id']
-        //   }).done((state) => {
-        //     if (state)
-        //       return next('capital present');
-
-        //     next();
-        //   });
-        // }
       }
     }
   }, {});
@@ -75,17 +63,17 @@ module.exports = (sequelize, DataTypes) => {
   return State;
 };
 
-// var isUnique = function(modelName, field) {
-//   return function(value, next) {
-//     var Model = require("../models")[modelName];
-//     var query = {};
-//     query[field] = value;
-//     Model.find({where: query, attributes: ["id"]}).then(function(obj) {
-//       if (obj) {
-//         next(field + ' "' + value + '" is already in use');
-//       } else {
-//         next();
-//       }
-//     });
-//   };
-// }
+var isUnique = function(modelName, field) {
+  return function(value, next) {
+    var Model = require("../models")[modelName];
+    var query = {};
+    query[field] = value;
+    Model.find({where: query, attributes: ["id"]}).then(function(obj) {
+      if (obj) {
+        next(field + ' "' + value + '" is already in use');
+      } else {
+        next();
+      }
+    });
+  };
+}

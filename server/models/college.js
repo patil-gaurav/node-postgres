@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
           args: 4,
           msg: 'Enter 4 digit college code in string format'
         },
-        // isUnique: helper.isUniqueValidation("College", "code")
+        isUnique: isUnique("College", "code")
       }
     },
     name: {
@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
           args: true,
           msg: 'College name must be present'
         },
-        isUnique: helper.isUniqueValidation("College", "name")
+        isUnique: isUnique("College", "name")
       }
     },
     address: {
@@ -99,11 +99,21 @@ module.exports = (sequelize, DataTypes) => {
       through: 'CollegeCourse',
       foreignKey: 'collegeId'
     });
-
-    // as: 'courses',
-    // through: 'UniversityCourse',
-    // foreignKey: 'universityId'
-
   };
   return College;
 };
+
+var isUnique = function(modelName, field) {
+  return function(value, next) {
+    var Model = require("../models")[modelName];
+    var query = {};
+    query[field] = value;
+    Model.find({where: query, attributes: ["id"]}).then(function(obj) {
+      if (obj) {
+        next(field + ' "' + value + '" is already in use');
+      } else {
+        next();
+      }
+    });
+  };
+}

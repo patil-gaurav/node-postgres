@@ -1,5 +1,6 @@
 const College = require('../../models').College;
 const University = require('../../models').University;
+const Course = require('../../models').Course;
 
 module.exports = {
   create (req, res) {
@@ -45,5 +46,55 @@ module.exports = {
         .catch(error => res.status(401).send(error));
     })
     .catch(error => res.status(401).send(error));
+  },
+
+  index (req, res) {
+    College
+      .findAll({
+        include: [{
+          model: Course,
+          attributes: ['id', 'name', 'type', 'degree'],
+          as: 'courses'
+        }]}
+      )
+      .then(colleges => res.status(201).send(colleges))
+      .catch(error => res.status(401).send(error));
+  },
+
+  addCourseToCollege (req, res) {
+    if (!req.body.collegeId || !req.body.courseId) {
+      return res.status(401).send({msg: 'All parameteres are mandatory.'});
+    }
+
+    College
+      .find({
+        where: {
+          id: req.body.collegeId
+        }
+      })
+      .then(college => {
+        if (!college) {
+          return res.status(401).send({msg: 'College not found'});
+        }
+
+        Course
+          .find({
+            where: {
+              id: req.body.courseId
+            }
+          })
+          .then(course => {
+            if(!course) {
+              return res.status(401).send({msg: 'Course not found'});
+            }
+
+            college
+              .addCourse([course])
+              .then(uc => res.status(201).send(uc))
+              .catch(error => res.status(401).send(error));
+          })
+          .catch(error => res.status(401).send(error));
+      })
+      .catch(error => res.status(401).send(error));
   }
 }

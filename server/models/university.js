@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
           args: true,
           msg: 'University name must be present'
         },
-        isUnique: helper.isUniqueValidation("University", "name")
+        isUnique: isUnique("University", "name")
       }
     },
     address: {
@@ -29,15 +29,10 @@ module.exports = (sequelize, DataTypes) => {
           args: true,
           msg: 'Address must be present'
         },
-        isUnique: helper.isUniqueValidation("University", "address")
+        isUnique: isUnique("University", "address")
       }
     }
-  }, {
-    // validate: {
-    //   uniqueName: helper.isUniqueValidation("University", "name"),
-    //   uniqueAddress: helper.isUniqueValidation("University", "address")
-    // }
-  });
+  }, {});
   University.associate = function(models) {
     // associations can be defined here
     University.belongsTo(models.State, {
@@ -59,3 +54,18 @@ module.exports = (sequelize, DataTypes) => {
   };
   return University;
 };
+
+var isUnique = function(modelName, field) {
+  return function(value, next) {
+    var Model = require("../models")[modelName];
+    var query = {};
+    query[field] = value;
+    Model.find({where: query, attributes: ["id"]}).then(function(obj) {
+      if (obj) {
+        next(field + ' "' + value + '" is already in use');
+      } else {
+        next();
+      }
+    });
+  };
+}

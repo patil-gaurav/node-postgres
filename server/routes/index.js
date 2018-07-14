@@ -42,6 +42,8 @@ module.exports = (app) => {
 
   // College Routes
   app.post('/api/colleges', collegesApiCtrl.create);
+  app.get('/api/colleges', collegesApiCtrl.index);
+  app.post('/api/add-course-to-college', collegesApiCtrl.addCourseToCollege);
 
   app.all('/api/todos/:todoId/items', (req, res) =>
     res.status(405).send({
