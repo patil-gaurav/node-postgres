@@ -1,17 +1,20 @@
+const users = require('./users');
+
 const todos = require('./todos');
 const todoItems = require('./todoitems');
-const users = require('./api/users');
-const states = require('./api/states');
-const universities = require('./api/universities');
-const courses = require('./api/courses');
-const colleges = require('./api/colleges');
+const usersApi = require('./api/users');
+const statesApi = require('./api/states');
+const universitiesApi = require('./api/universities');
+const coursesApi = require('./api/courses');
+const collegesApi = require('./api/colleges');
 
 module.exports = {
+    users,
     todos,
     todoItems,
-    users,
-    states,
-    universities,
-    courses,
-    colleges,
+    usersApi,
+    statesApi,
+    universitiesApi,
+    coursesApi,
+    collegesApi,
 };

@@ -1,13 +1,19 @@
+const userCtrl = require('../controllers').users;
+const csrf = require('csurf');
+const csrfProtection = csrf();
+const passport = require('passport');
+
 const todosController = require('../controllers').todos;
 const todoItemsController = require('../controllers').todoItems;
-const usersApiCtrl = require('../controllers').users;
+const usersApiCtrl = require('../controllers').usersApi;
 const authMiddlewares = require('../middlewares/auth');
-const statesApiCtrl = require('../controllers').states;
-const universitiesApiCtrl = require('../controllers').universities;
-const coursesApiCtrl = require('../controllers').courses;
-const collegesApiCtrl = require('../controllers').colleges;
+const statesApiCtrl = require('../controllers').statesApi;
+const universitiesApiCtrl = require('../controllers').universitiesApi;
+const coursesApiCtrl = require('../controllers').coursesApi;
+const collegesApiCtrl = require('../controllers').collegesApi;
 
 module.exports = (app) => {
+
   app.get('/api', (req, res) => res.status(200).send({
     message: 'Welcome to the Todos API!',
   }));
@@ -50,4 +56,25 @@ module.exports = (app) => {
       message: 'Method not allowed',
     })
   );
+
+  // CSRF Protected Routes
+  app.use(csrfProtection);
+  app.get('/', function(req, res, next) {
+    res.render('index', { title: 'Admission System' });
+  });
+
+  app.get('/user/register', userCtrl.register);
+  app.get('/user/login', userCtrl.getlogin);
+  app.post('/user/login', passport.authenticate('local.signin', {
+    successRedirect: '/user/profile',
+    failureRedirect: '/user/signin'
+  }));
+
+
+//   passport.authenticate('local.signin', {
+//     successRedirect: '/user/profile',
+//     failureRedirect: '/user/signin',
+//     failureFlash: true
+// })
+
 }
