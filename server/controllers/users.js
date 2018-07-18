@@ -1,3 +1,5 @@
+var express = require('express');
+
 const User = require('../models').User;
 
 module.exports = {
@@ -5,13 +7,23 @@ module.exports = {
     res.render('users/register', { title: 'Regidsfdsfdsfster User' });
   },
 
-  getlogin (req, res) {
+  login (req, res) {
     res.render('users/login', { csrfToken: req.csrfToken(), title: 'Regidsfdsfdsfster User' });
   },
 
   setlogin (req, res) {
     res.redirect('/');
-  }
+  },
 
+  profile (req, res) {
+    res.render('users/profile');
+  },
+
+  logout (req, res) {
+    req.session.destroy(function(err) {
+      res.redirect('/');
+    });
+  }
   
 };
+

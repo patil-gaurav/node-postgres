@@ -1,7 +1,9 @@
 const userCtrl = require('../controllers').users;
 const csrf = require('csurf');
 const csrfProtection = csrf();
-const passport = require('passport');
+// const passport = require('passport');
+// const session = require('express-session');
+// const cookieParser = require('cookie-parser');
 
 const todosController = require('../controllers').todos;
 const todoItemsController = require('../controllers').todoItems;
@@ -12,7 +14,7 @@ const universitiesApiCtrl = require('../controllers').universitiesApi;
 const coursesApiCtrl = require('../controllers').coursesApi;
 const collegesApiCtrl = require('../controllers').collegesApi;
 
-module.exports = (app) => {
+module.exports = (app, passport) => {
 
   app.get('/api', (req, res) => res.status(200).send({
     message: 'Welcome to the Todos API!',
@@ -59,22 +61,42 @@ module.exports = (app) => {
 
   // CSRF Protected Routes
   app.use(csrfProtection);
+  app.get('/user/profile',isLoggedIn, userCtrl.profile);
+  app.get('/user/logout', userCtrl.logout);
+
   app.get('/', function(req, res, next) {
     res.render('index', { title: 'Admission System' });
   });
 
   app.get('/user/register', userCtrl.register);
-  app.get('/user/login', userCtrl.getlogin);
+  app.get('/user/login', userCtrl.login);
   app.post('/user/login', passport.authenticate('local.signin', {
     successRedirect: '/user/profile',
-    failureRedirect: '/user/signin'
+    failureRedirect: '/user/login'
   }));
 
 
-//   passport.authenticate('local.signin', {
-//     successRedirect: '/user/profile',
-//     failureRedirect: '/user/signin',
-//     failureFlash: true
-// })
-
+  function isLoggedIn(req, res, next) {
+    console.log('==========='+req.isAuthenticated())
+      if (req.isAuthenticated()) {
+          return next();
+      }
+  
+      res.redirect('/user/login');
+  }
 }
+
+// function isLoggedIn (req, res, next) {
+//   console.log(req.session);
+//   if (req.session.user && req.cookies.user_sid) {
+//       return next();
+//   }
+//   res.redirect('/');
+// }
+
+// function isNotLoggedIn (req, res, next) {
+//   if (!req.isAuthenticated()) {
+//       return next();
+//   }
+//   res.redirect('/');
+// }

@@ -7,24 +7,20 @@
       </div>
       <div class="card-body">
         <form action="/user/login" method="post">
-          <div class="input-group input-group-sm mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="inputGroup-sizing-sm">
-                <i class="fas fa-user"></i>
-              </span>
-            </div>
-            <input type="text" name="email" id="email" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" name="email" class="form-control" 
+                  id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            {{!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> --}}
           </div>
-          <div class="input-group input-group-sm mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="inputGroup-sizing-sm">
-                <i class="fas fa-key"></i>
-              </span>
-            </div>
-            <input type="text" name="password" id="password" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" name="password" class="form-control" 
+                  id="exampleInputPassword1" placeholder="Password">
           </div>
-          <input type="hidden" name="_csrf" value="{{csrfToken}}">
-          <button type="submit" class="btn btn-primary">Login</button>
+          <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+          <button type="submit" class="btn btn-primary">Sign In</button>
+
         </form>
       </div>
     </div>
