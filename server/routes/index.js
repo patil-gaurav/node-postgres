@@ -60,7 +60,7 @@ module.exports = (app, passport) => {
   );
 
   // CSRF Protected Routes
-  app.use(csrfProtection);
+  // app.use(csrfProtection);
   app.get('/user/profile',isLoggedIn, userCtrl.profile);
   app.get('/user/logout', userCtrl.logout);
 
@@ -70,10 +70,9 @@ module.exports = (app, passport) => {
 
   app.get('/user/register', userCtrl.register);
   app.get('/user/login', userCtrl.login);
-  app.post('/user/login', passport.authenticate('local.signin', {
-    successRedirect: '/user/profile',
-    failureRedirect: '/user/login'
-  }));
+  app.post('/user/login', passport.authenticate('local.signin', { successRedirect: '/user/profile',
+  failureRedirect: '/user/login'}
+  ));
 
 
   function isLoggedIn(req, res, next) {

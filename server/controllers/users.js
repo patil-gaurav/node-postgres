@@ -8,7 +8,7 @@ module.exports = {
   },
 
   login (req, res) {
-    res.render('users/login', { csrfToken: req.csrfToken(), title: 'Regidsfdsfdsfster User' });
+    res.render('users/login');
   },
 
   setlogin (req, res) {
