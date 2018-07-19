@@ -3,12 +3,12 @@ var express = require('express');
 const User = require('../models').User;
 
 module.exports = {
-  register (req, res) {
-    res.render('users/register', { title: 'Regidsfdsfdsfster User' });
+  signup (req, res) {
+    res.render('users/signup', { csrfToken: req.csrfToken(), title: 'Register User' });
   },
 
   login (req, res) {
-    res.render('users/login');
+    res.render('users/login', { csrfToken: req.csrfToken() });
   },
 
   setlogin (req, res) {

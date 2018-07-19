@@ -60,7 +60,7 @@ module.exports = (app, passport) => {
   );
 
   // CSRF Protected Routes
-  // app.use(csrfProtection);
+  app.use(csrfProtection);
   app.get('/user/profile',isLoggedIn, userCtrl.profile);
   app.get('/user/logout', userCtrl.logout);
 
@@ -68,20 +68,31 @@ module.exports = (app, passport) => {
     res.render('index', { title: 'Admission System' });
   });
 
-  app.get('/user/register', userCtrl.register);
-  app.get('/user/login', userCtrl.login);
-  app.post('/user/login', passport.authenticate('local.signin', { successRedirect: '/user/profile',
-  failureRedirect: '/user/login'}
-  ));
+  app.get('/user/signup', userCtrl.signup);
+  app.post('/user/signup', passport.authenticate('local-signup', {
+                                                  successRedirect: '/user/profile',
+                                                  failureRedirect: '/user/signup'
+                                                }));
 
+  app.get('/user/login', userCtrl.login);
+  app.post('/user/login', passport.authenticate('local-signin', {
+                                                  successRedirect: '/user/profile',
+                                                  failureRedirect: '/user/login'
+                                                }));
 
   function isLoggedIn(req, res, next) {
     console.log('==========='+req.isAuthenticated())
-      if (req.isAuthenticated()) {
-          return next();
-      }
-  
-      res.redirect('/user/login');
+    if (req.isAuthenticated()) {
+      return next();
+    }
+    res.redirect('/user/login');
+  }
+
+  function isNotLoggedIn (req, res, next) {
+    if (!req.isAuthenticated()) {
+      return next();
+    }
+    res.redirect('/');
   }
 }
 
