@@ -16,7 +16,7 @@ module.exports = {
   },
 
   profile (req, res) {
-    res.render('users/profile');
+    res.render('users/profile', {profile: req.user});
   },
 
   logout (req, res) {

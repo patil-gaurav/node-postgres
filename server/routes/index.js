@@ -13,6 +13,7 @@ const statesApiCtrl = require('../controllers').statesApi;
 const universitiesApiCtrl = require('../controllers').universitiesApi;
 const coursesApiCtrl = require('../controllers').coursesApi;
 const collegesApiCtrl = require('../controllers').collegesApi;
+const branchesApiCtrl = require('../controllers').branchesApi;
 
 module.exports = (app, passport) => {
 
@@ -52,6 +53,9 @@ module.exports = (app, passport) => {
   app.post('/api/colleges', collegesApiCtrl.create);
   app.get('/api/colleges', collegesApiCtrl.index);
   app.post('/api/add-course-to-college', collegesApiCtrl.addCourseToCollege);
+
+  app.post('/api/branches', branchesApiCtrl.addBranchToCollege)
+
 
   app.all('/api/todos/:todoId/items', (req, res) =>
     res.status(405).send({

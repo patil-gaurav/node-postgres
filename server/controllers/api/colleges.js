@@ -1,6 +1,7 @@
 const College = require('../../models').College;
 const University = require('../../models').University;
 const Course = require('../../models').Course;
+const Branch = require('../../models').Branch;
 
 module.exports = {
   create (req, res) {
@@ -55,6 +56,10 @@ module.exports = {
           model: Course,
           attributes: ['id', 'name', 'type', 'degree'],
           as: 'courses'
+        },
+        {
+          model: Branch,
+          as: 'branches'
         }]}
       )
       .then(colleges => res.status(201).send(colleges))

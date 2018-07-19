@@ -99,6 +99,11 @@ module.exports = (sequelize, DataTypes) => {
       through: 'CollegeCourse',
       foreignKey: 'collegeId'
     });
+
+    College.hasMany(models.Branch, {
+      as: 'branches',
+      foreignKey: 'collegeId'
+    })
   };
   return College;
 };

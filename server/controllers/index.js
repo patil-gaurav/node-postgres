@@ -7,9 +7,13 @@ const statesApi = require('./api/states');
 const universitiesApi = require('./api/universities');
 const coursesApi = require('./api/courses');
 const collegesApi = require('./api/colleges');
+const branchesApi = require('./api/branches');
 
 module.exports = {
+    // For Web
     users,
+
+    // For Api's
     todos,
     todoItems,
     usersApi,
@@ -17,4 +21,5 @@ module.exports = {
     universitiesApi,
     coursesApi,
     collegesApi,
+    branchesApi,
 };
