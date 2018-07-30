@@ -2,7 +2,7 @@ const faker = require('faker');
 
 var usersArray = [];
 
-for (var i = 1; i <= 5; i++) {
+for (var i = 1; i <= 5000; i++) {
   var user = {};
 
   user['email'] = faker.internet.email();
