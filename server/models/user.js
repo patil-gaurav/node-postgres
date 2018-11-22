@@ -63,7 +63,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false
-    }
+    },
+    // role: {
+    //   type: DataTypes.ENUM,
+    //   allowNull: false,
+    //   values: ['admin', 'college', 'student']
+    // }
   }, {
     hooks: {
       beforeCreate: (user, next) => {
@@ -83,6 +88,11 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'userId',
       as: 'accessToken'
     });
+
+    User.hasOne(models.EducationDetail, {
+      foreignKey: 'userId',
+      as: 'educationDetail'
+    })
   };
 
   // User.beforeCreate((user, next) => {

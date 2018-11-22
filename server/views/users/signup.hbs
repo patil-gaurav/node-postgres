@@ -1,0 +1,71 @@
+<div class="row">
+  {{!-- <div class="col"></div>
+  <div class="col-md-12"></div> --}}
+  <div class="col">
+    <div class="card mt-3">
+      <div class="card-header">
+        Register
+      </div>
+      <div class="card-body">
+        <form action="/user/signup" method="post">
+          <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" name="password" aria-describedby="passwordHelp" placeholder="Enter password">
+            </div>
+
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input type="text" class="form-control" id="firstName" name="firstName" aria-describedby="firstNameHelp" placeholder="Enter First Name">
+            </div>
+
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input type="text" class="form-control" id="lastName" name="lastName" aria-describedby="lastNameHelp" placeholder="Enter Last Name">
+            </div>
+
+            <div class="form-group">
+              <label for="gender">Gender</label>
+              <input type="text" class="form-control" id="gender" name="gender" aria-describedby="genderHelp" placeholder="Enter gender">
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <label for="dateOfBirth">Date Of Birth</label>
+              <input type="text" class="form-control" id="dateOfBirth" name="dateOfBirth" aria-describedby="dateOfBirthHelp" placeholder="Enter date of birth">
+            </div>
+
+            <div class="form-group">
+              <label for="country">Country</label>
+              <input type="text" class="form-control" id="country" name="country" aria-describedby="countryHelp" placeholder="Enter Country">
+            </div>
+
+            <div class="form-group">
+              <label for="state">State</label>
+              <input type="text" class="form-control" id="state" name="state" aria-describedby="stateHelp" placeholder="Enter state">
+            </div>
+
+            <div class="form-group">
+              <label for="city">City</label>
+              <input type="text" class="form-control" id="city" name="city" aria-describedby="cityHelp" placeholder="Enter city">
+            </div>
+
+            <div class="form-group">
+              <label for="pincode">Pincode</label>
+              <input type="text" class="form-control" id="pincode" name="pincode" aria-describedby="pincodeHelp" placeholder="Enter pincode">
+            </div>
+            <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+            <button type="submit" class="btn btn-primary">Register</button>
+          </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

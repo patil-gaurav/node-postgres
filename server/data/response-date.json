@@ -1,0 +1,86 @@
+{
+	"collegeId": "",
+	"courseId": "",
+	"branchId": "",
+	"status": "",
+	"totalIntake": ""
+}
+
+State
+[
+    {
+        "id": 25,
+        "uuid": "f2e8105d-7b60-49c9-9e87-b2e6a0073372",
+        "name": "maharashtra",
+        "country": "India",
+        "capital": "Mumbai",
+        "createdAt": "2018-07-13T12:46:39.639Z",
+        "updatedAt": "2018-07-13T12:46:39.639Z",
+        "universities": []
+    }
+]
+
+University
+{
+    "id": "8432d35e-c0cb-4c6d-998e-3bb390c5c2e9",
+    "stateId": 25,
+    "name": "savitribai phule pune university",
+    "address": "Ganeshkhind, Pune, Maharashtra 411007",
+    "updatedAt": "2018-07-19T11:55:14.487Z",
+    "createdAt": "2018-07-19T11:55:14.487Z"
+}
+
+[
+    {
+        "id": "4e09717d-ea84-4e84-bb4a-482e25784eb4",
+        "name": "mechanical",
+        "type": "engineering",
+        "degree": "under_graduate",
+        "createdAt": "2018-07-12T11:08:44.329Z",
+        "updatedAt": "2018-07-12T11:08:44.329Z"
+    },
+    {
+        "id": "c12a6fe0-cd2a-4dd0-ac13-bf14eb85dd8c",
+        "name": "computer",
+        "type": "engineering",
+        "degree": "under_graduate",
+        "createdAt": "2018-07-12T11:09:19.512Z",
+        "updatedAt": "2018-07-12T11:09:19.512Z"
+    },
+    {
+        "id": "56c37b1e-4e6c-45f8-a104-a625bb597084",
+        "name": "civil",
+        "type": "engineering",
+        "degree": "under_graduate",
+        "createdAt": "2018-07-12T11:09:28.050Z",
+        "updatedAt": "2018-07-12T11:09:28.050Z"
+    }
+]
+
+Colleges
+[
+    {
+        "id": "4da6791e-8102-4d88-8024-7a9a5daf7536",
+        "code": "3003",
+        "name": "Government College of Engineering, Pune",
+        "address": "NH-6, Infront of Govt. ITI",
+        "city": "Pune",
+        "state": "Maharashtra",
+        "pin": "411000",
+        "createdAt": "2018-07-19T12:02:55.399Z",
+        "updatedAt": "2018-07-19T12:02:55.399Z",
+        "universityId": "8432d35e-c0cb-4c6d-998e-3bb390c5c2e9"
+    },
+    {
+        "id": "76a7feeb-4402-4772-8a38-15ff8b65add4",
+        "code": "3002",
+        "name": "Modern College of Engineering, Pune",
+        "address": "J. M. Road, Shivajinagar, Pune",
+        "city": "Pune",
+        "state": "Maharashtra",
+        "pin": "411001",
+        "createdAt": "2018-07-19T12:03:51.708Z",
+        "updatedAt": "2018-07-19T12:03:51.708Z",
+        "universityId": "8432d35e-c0cb-4c6d-998e-3bb390c5c2e9"
+    }
+]

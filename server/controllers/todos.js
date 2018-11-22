@@ -82,5 +82,11 @@ module.exports = {
                     .catch(error => res.status(400).send(error))
             })
             .catch(error => res.status(400).send(error));
+    },
+
+    upsert(req, res) {
+        Todo.upsert('Todos', {title: 'Gaurav'}, {title: 'Patil'}, {where: {title: 'Gaurav'}}).then((created, key) => {
+            res.send(created);
+        }).catch(error => res.send(error));
     }
 };
